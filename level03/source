@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+void	decrypt(int num)
+{
+	char			var1[] = "Q}|u`sfg~sf{}|a3";	/* ebp-0x1d */
+	int				len;							/* ebp-0x24*/
+	int				var3;							/* ebp-0x28*/
+	unsigned int	var2 = 0xffffffff;				/* ebp-0x2c */
+
+	len = strlen(var1);
+	var3 = 0;
+	while (var3 < len)
+	{
+		var1[var3] = var1[var3] ^ num;
+		++var3;
+	}
+	if (strncmp(var1, "Congratulations!", 0x10) == 0)
+	{
+		system("/bin/sh");
+		return ;
+	}
+	puts("\nInvalid Password");
+}
+
+void	test(int p, unsigned int var)
+{
+	unsigned int dif;
+
+	dif = var - p;	/* ebp+0xc - ebp+0x8 */
+	if (dif > 0x15)
+	{
+		/* ja     0x804884a <test+259> */
+		decrypt(rand());
+		return ;
+	}
+	// ((void*)((dif << 0x2) + 0x80489f0))();
+	decrypt(dif);
+}
+
+int main()
+{
+	int p;	/* esp+0x1c */
+
+	srand(time(0x0));
+	puts("35*");
+	puts("*\t\tlevel03\t\t**");
+	puts("35*");
+	printf("Password:");
+	scanf("%d", &p);
+	test(p, 0x1337d00d);
+	return (0);
+}
