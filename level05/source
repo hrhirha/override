@@ -72,6 +72,12 @@ int	main()
 		 */
 		++var1;
 	}
+	/*
+	   0x08048500 <+188>:	lea    eax,[esp+0x28]
+	   0x08048504 <+192>:	mov    DWORD PTR [esp],eax
+	   0x0804850c <+200>:	mov    DWORD PTR [esp],0x0
+	   0x08048513 <+207>:	call   0x8048370 <exit@plt>
+	*/
 	printf(buf);
 	exit(0);
 }
